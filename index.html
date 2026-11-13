@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#153e32">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="light dark">
 <title>Mukari Miyan Family Tree</title>
+<script>
+// Apply an explicit saved theme before the first paint; default to light.
+try{document.documentElement.dataset.theme=localStorage.getItem('ft-theme')==='dark'?'dark':'light'}catch(e){}
+</script>
 <style>
 :root{color-scheme:only light;--bg:#f5f7f6;--card:#ffffff;--row:#ffffff;--ink:#24352e;--muted:#64736b;--line:#d5dfd9;--rowb:#dfe6e2;--pine:#153e32;--pine2:#23815e;--tint:#edf7f1;--brass:#476658;--brass-bg:#edf5f0;--hit:#52a983;--b0:#2455d6;--b1:#c26408;--b2:#b82085;--b3:#008397;--gx:22px;--sh:0 2px 8px rgba(24,51,57,.04)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -353,10 +357,24 @@ h3{font:400 22px/1.2 Georgia,serif;letter-spacing:-.02em}
  .tools .generation-control #level{width:124px;padding-left:10px}
 }
 @media(max-width:380px){.tools .generation-control #generationMode{width:72px}.tools .generation-control #level{width:114px}.generation-control{gap:6px}}
+
+/* Theme follows the user's toggle, rather than the device preference. */
+:root[data-theme="dark"]{color-scheme:dark;--bg:#111827;--card:#1b2535;--row:#202c3d;--ink:#e7edf4;--muted:#a5b2c5;--line:#3e4b61;--rowb:#354358;--pine:#1d4333;--pine2:#88caa7;--tint:#263b32;--brass:#b5d7c4;--brass-bg:#273b33;--hit:#88caa7;--b0:#8baaff;--b1:#ffb464;--b2:#f18dce;--b3:#69d9eb;--sh:none}
+.theme-toggle{display:inline-flex;flex:none;align-items:center;justify-content:center;width:44px;min-height:44px;padding:10px;border-radius:10px;background:var(--bg);border:1px solid var(--rowb);color:var(--ink)}
+.theme-toggle:hover{background:var(--tint)}
+.theme-toggle[aria-pressed="true"]{color:var(--pine2)}
+.theme-toggle .ic{width:20px;height:20px}
+@media(max-width:699px){
+ .bar .wrap{grid-template-columns:minmax(0,1fr) 44px;gap:10px}
+ .bar .search{grid-column:1/-1}
+ .bar .tabs{grid-column:1;min-width:0}
+ .bar .theme-toggle{grid-column:2;align-self:center}
+ .bar .tabs button{padding-inline:8px;gap:6px}
+}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="m19 6-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol><symbol id="i-expand" viewBox="0 0 24 24"><path d="m7 6 5 5 5-5"/><path d="m7 13 5 5 5-5"/></symbol><symbol id="i-collapse" viewBox="0 0 24 24"><path d="m17 11-5-5-5 5"/><path d="m17 18-5-5-5 5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol><symbol id="i-fit" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol><symbol id="i-tree" viewBox="0 0 24 24"><rect x="3" y="9.5" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M9 12h3V5.5h3M12 12v9h3"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17V9M13 17V5M18 17v-6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol><symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="m19 6-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></symbol><symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol><symbol id="i-expand" viewBox="0 0 24 24"><path d="m7 6 5 5 5-5"/><path d="m7 13 5 5 5-5"/></symbol><symbol id="i-collapse" viewBox="0 0 24 24"><path d="m17 11-5-5-5 5"/><path d="m17 18-5-5-5 5"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol><symbol id="i-fit" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol><symbol id="i-tree" viewBox="0 0 24 24"><rect x="3" y="9.5" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M9 12h3V5.5h3M12 12v9h3"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17V9M13 17V5M18 17v-6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.9 13.2A9 9 0 0 1 10.8 3.1 9 9 0 1 0 20.9 13.2Z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol></defs></svg>
 <header><p class="bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p><div class="wrap hd"><div class="logo"><svg class="ic" aria-hidden="true"><use href="#i-tree"/></svg></div><div class="header-copy"><p class="eyebrow">The family archive</p><h1>Mukari Miyan<br class="desktop-title-break"> Family Tree</h1><p class="header-subtitle">Tracing our roots across generations.</p></div><div class="stats" id="stats" aria-label="Family summary"></div></div></header>
 
 <div class="bar"><div class="wrap">
@@ -366,6 +384,7 @@ h3{font:400 22px/1.2 Georgia,serif;letter-spacing:-.02em}
 <button role="tab" id="tab-chart" aria-controls="v-chart" data-v="chart" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="#i-tree"/></svg>Chart</button>
 <button role="tab" id="tab-stats" aria-controls="v-stats" data-v="stats" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>Stats</button>
 </div>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode"><svg class="ic" aria-hidden="true"><use id="themeIcon" href="#i-moon"/></svg></button>
 </div></div>
 
 <main id="main">
@@ -955,6 +974,16 @@ function validateImport(value){
 }
 function dataSummary(d){let count=0,depth=0,duplicates=0;const names=new Set();(function walk(n,level){count++;depth=Math.max(depth,level);const name=clean(n[0]).toLowerCase();if(names.has(name))duplicates++;names.add(name);n[1].forEach(k=>walk(k,level+1))})(d,1);return {count,depth,duplicates}}
 function download(blob,name){const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function applyTheme(theme,persist=true){
+  const dark=theme==='dark';
+  document.documentElement.dataset.theme=dark?'dark':'light';
+  $('themeToggle').setAttribute('aria-pressed',String(dark));
+  $('themeToggle').title=dark?'Switch to light mode':'Switch to dark mode';
+  $('themeIcon').setAttribute('href',dark?'#i-sun':'#i-moon');
+  if(persist)try{localStorage.setItem('ft-theme',dark?'dark':'light')}catch(e){}
+}
+$('themeToggle').onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+applyTheme(document.documentElement.dataset.theme,false);
 // start
 const hm=location.hash.match(/^#p(\d+)$/);
 load(null);
